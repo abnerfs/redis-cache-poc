@@ -2,11 +2,23 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 import express from 'express';
-import { getPackageCorreios, PackageInfo } from './correio-service';
+import { PackageInfo } from './correio-service';
 import { redisGetAsync, redisSetAsync } from './redis-service';
 const app = express();
 
 const PORT = process.env.PORT || 8899;
+
+function sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  
+
+const getPackageCorreios = async ({}: string) => {
+    await sleep(1000 * 10);
+    return {
+        ok: true
+    } as unknown as PackageInfo;
+}
 
 
 const getPackage = async (pName: string) : Promise<PackageInfo> => {
