@@ -1,6 +1,6 @@
 import redis from 'redis'
 
-if (!process.env.REDIS_URL)
+if (!process.env.REDIS_TLS_URL)
     throw new Error("Invalid REDIS_URL");
 
 export const { redisGetAsync, redisSetAsync } = (() => {
@@ -8,7 +8,7 @@ export const { redisGetAsync, redisSetAsync } = (() => {
     // const redisClient = redis.createClient(redisURL.port, redisURL.hostname, { no_ready_check: true });
 
 
-    const redisClient = redis.createClient(process.env.REDIS_URL, {
+    const redisClient = redis.createClient(process.env.REDIS_TLS_URL, {
         tls: {
             rejectUnauthorized: false
         }
